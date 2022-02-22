@@ -7,6 +7,17 @@ namespace Mission4.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Rating",
+                columns: table => new
+                {
+                    RatingID = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rating", x => x.RatingID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Responses",
                 columns: table => new
                 {
@@ -27,6 +38,26 @@ namespace Mission4.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Rating",
+                column: "RatingID",
+                value: "G");
+
+            migrationBuilder.InsertData(
+                table: "Rating",
+                column: "RatingID",
+                value: "PG");
+
+            migrationBuilder.InsertData(
+                table: "Rating",
+                column: "RatingID",
+                value: "PG-13");
+
+            migrationBuilder.InsertData(
+                table: "Rating",
+                column: "RatingID",
+                value: "R");
+
+            migrationBuilder.InsertData(
                 table: "Responses",
                 columns: new[] { "FilmID", "Category", "Director", "Edited", "LentTo", "Notes", "Rating", "Title", "Year" },
                 values: new object[] { 1, "Action", "James Mangold", false, null, null, "PG-13", "Ford vs Ferarri", 2019 });
@@ -44,6 +75,9 @@ namespace Mission4.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Rating");
+
             migrationBuilder.DropTable(
                 name: "Responses");
         }

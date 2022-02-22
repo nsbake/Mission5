@@ -8,7 +8,7 @@ using Mission4.Models;
 namespace Mission4.Migrations
 {
     [DbContext(typeof(FilmContext))]
-    [Migration("20220222001722_Initial")]
+    [Migration("20220222003453_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,34 @@ namespace Mission4.Migrations
                             Rating = "PG-13",
                             Title = "The Dark Knight",
                             Year = 2008
+                        });
+                });
+
+            modelBuilder.Entity("Mission4.Models.Rating", b =>
+                {
+                    b.Property<string>("RatingID")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("RatingID");
+
+                    b.ToTable("Rating");
+
+                    b.HasData(
+                        new
+                        {
+                            RatingID = "G"
+                        },
+                        new
+                        {
+                            RatingID = "PG"
+                        },
+                        new
+                        {
+                            RatingID = "PG-13"
+                        },
+                        new
+                        {
+                            RatingID = "R"
                         });
                 });
 #pragma warning restore 612, 618

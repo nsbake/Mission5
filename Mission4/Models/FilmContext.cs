@@ -12,8 +12,28 @@ namespace Mission4.Models
 
         public DbSet<Film> Responses { get; set; }
 
+        public DbSet<Rating> Rating { get; set; }
+
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            mb.Entity<Rating>().HasData(
+                new Rating
+                {
+                    RatingID = "G"
+                },
+                new Rating
+                {
+                    RatingID = "PG"
+                },
+                new Rating
+                {
+                    RatingID = "PG-13"
+                },
+                new Rating
+                {
+                    RatingID = "R"
+                }
+             );
             mb.Entity<Film>().HasData(
                 new Film
                 {

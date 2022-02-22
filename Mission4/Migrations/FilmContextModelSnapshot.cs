@@ -86,6 +86,34 @@ namespace Mission4.Migrations
                             Year = 2008
                         });
                 });
+
+            modelBuilder.Entity("Mission4.Models.Rating", b =>
+                {
+                    b.Property<string>("RatingID")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("RatingID");
+
+                    b.ToTable("Rating");
+
+                    b.HasData(
+                        new
+                        {
+                            RatingID = "G"
+                        },
+                        new
+                        {
+                            RatingID = "PG"
+                        },
+                        new
+                        {
+                            RatingID = "PG-13"
+                        },
+                        new
+                        {
+                            RatingID = "R"
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }

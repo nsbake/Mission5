@@ -2,7 +2,42 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model List<Film>
+
 <div class="text-center">
     <h1 class="display-4">The Joel Hilton Film Collection</h1>
     <img src="JoelHiltonHeadshot.jpg"/>
 </div>
+<br />
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Category</td>
+            <td>Title</td>
+            <td>Year</td>
+            <td>Director</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>Lent to</td>
+            <td>Notes</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+            {
+        <tr>
+            <td>@m.Category</td>
+            <td>@m.Title</td>
+            <td>@m.Year</td>
+            <td>@m.Director</td>
+            <td>@m.Rating</td>
+            <td>@m.Edited</td>
+            <td>@m.LentTo</td>
+            <td>@m.Notes</td>
+            <td><a class="btn btn-primary" asp-controller="Home" asp-action="Edit" asp-route-filmid="@m.FilmID">Edit</a></td>
+            <td><a class="btn btn-danger" asp-controller="Home" asp-action="DeleteFilm" asp-route-filmid="@m.FilmID">Delete</a></td>
+        </tr>
+            }
+    </tbody>
+</table>

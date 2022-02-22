@@ -22,7 +22,9 @@ namespace Mission4.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var films = dbContext.Responses.ToList();
+
+            return View(films);
         }
 
         public IActionResult Podcast()
@@ -33,16 +35,70 @@ namespace Mission4.Controllers
         [HttpGet]
         public IActionResult AddFilm()
         {
+            ViewBag.Ratings = dbContext.Rating.ToList();
+
             return View();
         }
 
         [HttpPost]
         public IActionResult AddFilm(Film f)
         {
-            dbContext.Add(f);
+            if (ModelState.IsValid)
+            {
+                dbContext.Add(f);
+                dbContext.SaveChanges();
+
+                return View("Confirmation");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int filmid)
+        {
+            ViewBag.Ratings = dbContext.Rating.ToList();
+
+            var application = dbContext.Responses.Single(x => x.FilmID == filmid);
+
+            return View("AddFilm", application);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Film f)
+        {
+            if(ModelState.IsValid)
+            {
+                dbContext.Update(f);
+                dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("AddFilm");
+            }
+
+           
+        }
+
+        [HttpGet]
+        public IActionResult DeleteFilm(int filmid)
+        {
+            var application = dbContext.Responses.Single(x => x.FilmID == filmid);
+
+            return View(application);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteFilm(Film f)
+        {
+            dbContext.Responses.Remove(f);
             dbContext.SaveChanges();
 
-            return View("Confirmation");
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
